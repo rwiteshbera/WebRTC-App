@@ -77,6 +77,7 @@ const App = () => {
                 type="text"
                 onChange={(e) => setIdToCall(e.target.value)}
                 value={idToCall}
+                placeholder="Enter meeting id to call"
               />
 
               {callAccepted && !callEnded ? (

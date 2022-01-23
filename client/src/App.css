@@ -1,3 +1,7 @@
+.main {
+    text-align: center;
+}
+
 .options {
     margin: 0 auto;
     width: 100%;
@@ -23,6 +27,13 @@ video {
     justify-content: center;
 }
 
-input {
-    margin-right: 4rem;
+
+/* Android media queries */
+@media screen and (min-device-width: 0px) and (max-device-width: 768px) { 
+    .box {
+        flex-direction: column;
+    }
+    .options {
+        width: 100vw;
+    }
 }
