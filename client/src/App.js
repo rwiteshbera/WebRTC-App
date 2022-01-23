@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useContext } from "react";
+import { SocketContext } from "./SocketContext";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const { name, callAccepted, myVideo, userVideo, callEnded, stream, call } = useContext(SocketContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="container">
+        <h1>VideoCall App</h1>
+        <div className="videoplayer">
+          {/* My Own Video */}
+          {stream && (
+            <div className="myvideo">
+              <h4>{name || "Name"}</h4>
+              <video playsInline muted={true} autoPlay ref={myVideo}></video>
+            </div>
+          )}
+
+          {/* User's Video */}
+          {callAccepted && !callEnded && (
+            <div className="uservideo">
+              <h4>{call.name || "Name"}</h4>
+              <video playsInline muted={true} autoPlay ref={userVideo}></video>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default App;
