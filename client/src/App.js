@@ -50,7 +50,7 @@ const App = () => {
                   <h4>{call.name || "Name"}</h4>
                   <video
                     playsInline
-                    muted={true}
+                    // muted={true}
                     autoPlay
                     ref={userVideo}
                   ></video>
