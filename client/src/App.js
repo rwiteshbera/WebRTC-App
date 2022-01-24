@@ -38,8 +38,6 @@ const App = () => {
     let idInput = document.getElementById("enter-id").value;
     if (name === "") {
       alert("Enter your name.");
-    } else if (idInput === idToCall) {
-      alert("You are not allowed to call yourself.");
     } else {
       callUser(idToCall);
     }
