@@ -21,93 +21,110 @@ const App = () => {
   } = useContext(SocketContext);
 
   const [idToCall, setIdToCall] = useState("");
+  const [muteBtnText, setMuteBtnText] = useState("Mute Audio");
+
+  // Button to mute audio
+  const MuteUnmute = () => {
+    if (muteBtnText === "Mute Audio") {
+      setMuteBtnText("Unmute");
+      stream.getAudioTracks()[0].enabled = false;
+    } else if (muteBtnText === "Unmute") {
+      setMuteBtnText("Mute Audio");
+      stream.getAudioTracks()[0].enabled = true;
+    }
+  };
+
+  const callFunction = () => {
+    let idInput = document.getElementById("enter-id").value;
+    if (name === "") {
+      alert("Enter your name.");
+    } else if (idInput === idToCall) {
+      alert("You are not allowed to call yourself.");
+    } else {
+      callUser(idToCall);
+    }
+  };
 
   return (
-    <div>
-      <div className="main">
-        <h1>VideoCall App</h1>
-        <Container>
-          <Row>
-            <Col>
-              {/* My Own Video */}
-              {stream && (
-                <div className="myvideo">
-                  <h4>{name || "Name"}</h4>
-                  <video
-                    playsInline
-                    muted={true}
-                    autoPlay
-                    ref={myVideo}
-                  ></video>
-                </div>
-              )}
-            </Col>
+    <div className="main">
+      <h4 id="title">HealthCare Video Conference</h4>
 
-            <Col>
-              {/* User's Video */}
-              {callAccepted && !callEnded && (
-                <div className="uservideo">
-                  <h4>{call.name || "Name"}</h4>
-                  <video
-                    playsInline
-                    // muted={true}
-                    autoPlay
-                    ref={userVideo}
-                  ></video>
-                </div>
-              )}
-            </Col>
-          </Row>
-        </Container>
-
-        <div className="box">
-          <div className="options">
-            <form action="" noValidate autoComplete="off">
-              <input
-                placeholder="Your name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-              />
-              <CopyToClipboard text={me}>
-                <Button className="btn btn-primary">Copy Id</Button>
-              </CopyToClipboard>
-
-              <input
-                type="text"
-                onChange={(e) => setIdToCall(e.target.value)}
-                value={idToCall}
-                placeholder="Enter meeting id to call"
-              />
-
-              {callAccepted && !callEnded ? (
-                <Button className="btn btn-danger" onClick={leaveCall}>
-                  Hang Up
-                </Button>
-              ) : (
-                <Button
-                  className="btn btn-success"
-                  onClick={() => {
-                    callUser(idToCall);
-                  }}
-                >
-                  Call
-                </Button>
-              )}
-            </form>
-          </div>
-        </div>
-      </div>
-
+      {/* Incoming Call Panel  */}
       <div className="notification">
         {call.isReceivedCall && !callAccepted && (
           <div>
             <h3>{call.name} is calling.</h3>
-            <Button className="btn btn-primary" onClick={answerCall}>
+            <Button className="btn btn-success" onClick={answerCall}>
               Answer
             </Button>
           </div>
         )}
+      </div>
+
+      <div className="videos">
+        {/* My Own Video */}
+        {stream && (
+          <div className="myvideo">
+            <p>{name || ""}</p>
+            <video playsInline muted={true} autoPlay ref={myVideo}></video>
+          </div>
+        )}
+        {/* User's Video */}
+        {callAccepted && !callEnded && (
+          <div className="uservideo">
+            <p>{call.name || "Name"}</p>
+            <video
+              playsInline
+              // muted={true}
+              autoPlay
+              ref={userVideo}
+            ></video>
+          </div>
+        )}
+      </div>
+
+      <div className="box">
+        <div className="options">
+          {callAccepted && (
+            <Button className="mute-button" onClick={MuteUnmute}>
+              {muteBtnText}
+            </Button>
+          )}
+          <form action="" noValidate autoComplete="off">
+            <input
+              placeholder="Your name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <CopyToClipboard text={me}>
+              <Button className="button">Copy Id</Button>
+            </CopyToClipboard>
+
+            <input
+              type="text"
+              id="enter-id"
+              onChange={(e) => setIdToCall(e.target.value)}
+              value={idToCall}
+              placeholder="Enter meeting id to call"
+            />
+
+            {callAccepted && !callEnded ? (
+              <Button className="button btn btn-danger" onClick={leaveCall}>
+                Hang Up
+              </Button>
+            ) : (
+              <Button
+                className="button btn btn-primary"
+                onClick={() => {
+                  callFunction();
+                }}
+              >
+                Call
+              </Button>
+            )}
+          </form>
+        </div>
       </div>
     </div>
   );
