@@ -6,9 +6,13 @@
 > 
 > npm install
 
+
+
+[Deploy Backend in Heroku](https://www.codecademy.com/article/deploying-a-back-end-with-heroku)
+
+
+
 - After deploying the backend, copy the server-side link and paste in  `client/src/SocketContext.js`file.
-  
-  > [Deploy Backend in Heroku](https://www.codecademy.com/article/deploying-a-back-end-with-heroku)
   
   ```js
   const socket = io("<LINK>");
