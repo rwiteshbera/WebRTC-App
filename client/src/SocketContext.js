@@ -4,6 +4,7 @@ import Peer from "simple-peer";
 
 const SocketContext = createContext();
 
+// Paste your deployed application link here
 // const socket = io("http://localhost:5000");
 const socket = io("https://webrtc-heroku-rwitesh.herokuapp.com/");
 
