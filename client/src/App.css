@@ -3,13 +3,16 @@
 .main {
     text-align: center;
     height:100vh;
+    background-image: linear-gradient(rgb(175, 221, 235), rgb(199, 190, 233));
 }
 #title {
     padding: 1rem 0rem;
-    border-bottom: 1px solid blue;
-    background-color: rgb(184, 195, 255);
-    color: black;
-    font-family: 'Mochiy Pop P One', sans-serif;
+    border-bottom: 2px solid rgba(47, 0, 255, 0.61);
+    background-color: rgb(245, 245, 248);
+    color: #0A5295;
+    /* font-family: 'Mochiy Pop P One', sans-serif; */
+    font-family: 'Roboto';
+    font-size: 2rem;
 }
 
 .videos{
@@ -26,9 +29,9 @@
 }
 
 video{
-    width:45vw;
-    margin: 0rem 0.5rem;
-    border: 2px solid black;
+    width:40vw;
+    margin: 0.5rem 0.5rem;
+    border: 3px solid rgba(18, 17, 92, 0.829);
     /* height: 50vh; */
 }
 .options {
@@ -39,6 +42,7 @@ video{
 .button {
     margin: 1rem 2rem;
     padding: 0.4rem 1rem;
+    
 }
 
 .mute-button{
@@ -47,12 +51,17 @@ video{
 }
 /* Android media queries */
 @media screen and (min-device-width: 0px) and (max-device-width: 768px) { 
+    .main{
+        height: 100%;
+    }
     .videos{
         flex-wrap: wrap;
         flex-direction: column-reverse;
+        
     }
 
     video{
         width: 100vw;
+        margin: 0.5rem 0rem;
     }
 }
